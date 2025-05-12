@@ -13,12 +13,12 @@ class IceCreamAdmin(admin.ModelAdmin):
         'is_published',
         'is_on_main',
         'category',
-        'wrapper'
+        'wrapper',
     )
     list_editable = (
         'is_published',
         'is_on_main',
-        'category'
+        'category',
     )
     search_fields = ('title',)
     list_filter = ('category', 'is_published')
@@ -35,11 +35,16 @@ class IceCreamInline(admin.TabularInline):
 
 
 class CategoryAdmin(admin.ModelAdmin):
-    inlines = (
-        IceCreamInline,
-    )
     list_display = (
         'title', 'slug', 'output_order'
+    )
+    list_display_links = ('title',)
+    list_editable = (
+        'output_order',
+    )
+    search_fields = ('title',)
+    inlines = (
+        IceCreamInline,
     )
 
 

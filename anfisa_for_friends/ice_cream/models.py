@@ -13,6 +13,7 @@ class Category(PublishedModel):
     class Meta:
         verbose_name = 'категория'
         verbose_name_plural = 'Категории'
+        ordering = ('output_order',)
 
     def __str__(self):
         return self.title
@@ -63,7 +64,11 @@ class IceCream(PublishedModel):
         related_name='ice_creams',
         verbose_name='Категория'
     )
-    toppings = models.ManyToManyField(Topping, verbose_name='Топпинг')
+    toppings = models.ManyToManyField(
+        Topping,
+        verbose_name='Топпинг',
+        symmetrical=False
+    )
     is_on_main = models.BooleanField(default=False, verbose_name='На главную')
 
     class Meta:
