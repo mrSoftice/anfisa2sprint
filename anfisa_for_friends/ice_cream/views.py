@@ -26,7 +26,11 @@ def ice_cream_detail(request, pk):
 
 def ice_cream_list(request):
     template = 'ice_cream/list.html'
-    ice_cream_list = IceCream.objects.all()
+    ice_cream_list = IceCream.objects.select_related('category').filter(
+        is_published=True,
+        category__is_published=True
+    ).order_by('category')
+
     context = {
         'ice_cream_list': ice_cream_list
     }
