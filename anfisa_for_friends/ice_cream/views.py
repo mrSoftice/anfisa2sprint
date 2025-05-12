@@ -1,11 +1,23 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 from ice_cream.models import IceCream
 
 
 def ice_cream_detail(request, pk):
     template = 'ice_cream/detail.html'
-    ice_cream = IceCream.objects.get(id=pk)
+    # ice_cream = IceCream.objects.get(pk=pk)
+    # ice_cream = get_object_or_404(IceCream, pk=pk)
+    ice_cream = get_object_or_404(
+        # Первый аргумент - QuerySet:
+        IceCream.objects
+        .filter(is_published=True)
+        .select_related('wrapper', 'category'),
+        #    'title', 'description', 'category__title', 'wrapper__title'
+        #),
+        # Второй аргумент -
+        # условие, по которому фильтруются записи из QuerySet:
+        pk=pk
+    )
     context = {
         'ice_cream': ice_cream
     }
