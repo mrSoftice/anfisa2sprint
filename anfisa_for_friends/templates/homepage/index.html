@@ -1,7 +1,5 @@
 {% extends "base.html" %}
-
 {% load static %}
-
 {% block title %}
   Анфиса для друзей. Главная
 {% endblock %}
@@ -11,20 +9,26 @@
         <h2>Популярные сорта</h2>
     </div>
     {% for ice_cream in ice_cream_list %}
-      <!--{% if ice_cream.is_on_main %} -->
-        <div class="row">
-          <div class="col-md-6 col-sm-8 col-xs-12">
+      <div class="card">
 
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">{{ ice_cream.title }}</h5>
-                <p class="card-text">{{ ice_cream.description|truncatewords:10 }}</p>
-                <a href="{% url 'ice_cream:ice_cream_detail' ice_cream.id  %}" class="card-link">Подробнее...</a>
-              </div>
+        <div class="row g-0">
+
+          <div class="col-md-3">
+            <img class="img-fluid rounded-start"
+              src="{% static 'img/image-holder.png' %}"
+              height="200" width="150"
+            >
+          </div>
+          <div class="col-md-6">
+            <div class="card-body">
+              <h5 class="card-title">{{ ice_cream.title }}</h5>
+              <p class="card-text">{{ ice_cream.description|truncatewords:10 }}</p>
+              <p>Категория: {{ ice_cream.category__title }}</p>
+              <a href="{% url 'ice_cream:ice_cream_detail' ice_cream.id  %}" class="card-link">Подробнее...</a>
             </div>
           </div>
         </div>
-    <!--  {% endif %} -->
+      </div>
     {% endfor %}
   </div>
 {% endblock %}
