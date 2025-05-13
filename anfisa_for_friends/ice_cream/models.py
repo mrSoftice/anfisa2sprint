@@ -13,7 +13,7 @@ class Category(PublishedModel):
     class Meta:
         verbose_name = 'категория'
         verbose_name_plural = 'Категории'
-        ordering = ('output_order',)
+        ordering = ('output_order', 'title',)
 
     def __str__(self):
         return self.title

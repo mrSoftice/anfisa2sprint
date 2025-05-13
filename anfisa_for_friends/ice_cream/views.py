@@ -10,7 +10,7 @@ def ice_cream_detail(request, pk):
     ice_cream = get_object_or_404(
         # Первый аргумент - QuerySet:
         IceCream.objects
-        .filter(is_published=True)
+        .filter(is_published=True, category__is_published=True)
         .select_related('wrapper', 'category'),
         #    'title', 'description', 'category__title', 'wrapper__title'
         #),
